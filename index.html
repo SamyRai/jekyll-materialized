@@ -1,0 +1,36 @@
+---
+layout: default
+---
+
+<div class="home">
+  <h2>Posts</h2>
+
+  <div>
+    {% for post in site.posts %}
+      {% assign value = forloop.index | modulo:2 %}
+      {% if value != 0 %}
+        <div class="row">
+      {% endif %}
+        <div class="col s12 m12 l6">
+          <div class="card small">
+            <div class="card-image">
+              <img src="images/office.jpg">
+              <span class="card-title">{{ post.title }}</span>
+            </div>
+            <div class="card-content">
+              <p>{{ post.excerpt | remove: '<p>' | remove: '</p>' }}</p>
+            </div>
+            <div class="card-action">
+              <a href="{{ post.url | prepend: site.baseurl }}" class="{{ site.main_text_colour }}">Read more</a>
+              <span class="post-meta right">{{ post.date | date: "%b %-d, %Y" }}</span>
+            </div>
+          </div>
+        </div>
+      {% if value == 0 or forloop.last %}
+      </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
+
+</div>
